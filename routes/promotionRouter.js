@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Promotion = require('../models/promotion');
-const authenticate = require('../authenicate');
+const authenticate = require('../authenticate');
 const cors = require('./cors');
 
 const promotionRouter = express.Router();

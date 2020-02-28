@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const passport = require('passport');
 const router = express.Router();
-const authenticate = require('../authenicate');
+const authenticate = require('../authenticate');
 const cors = require('./cors');
 
 router.get('/', cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {

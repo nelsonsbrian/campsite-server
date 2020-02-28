@@ -1,5 +1,5 @@
 const express = require('express');
-const authenticate = require('../authenicate');
+const authenticate = require('../authenticate');
 const multer = require('multer');
 const cors = require('./cors');
 
