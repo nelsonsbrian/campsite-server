@@ -47,16 +47,16 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/', indexRouter);
+app.use('/api/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/campsites', campsiteRouter);
-app.use('/promotions', promotionRouter);
-app.use('/partners', partnerRouter);
-app.use('/imageUpload', uploadRouter);
-app.use('/favorites', favoriteRouter);
+app.use('/api/campsites', campsiteRouter);
+app.use('/api/promotions', promotionRouter);
+app.use('/api/partners', partnerRouter);
+app.use('/api/imageUpload', uploadRouter);
+app.use('/api/favorites', favoriteRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
