@@ -5,6 +5,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const { mongoUrl } = require('./config');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,8 +14,10 @@ const promotionRouter = require('./routes/promotionRouter');
 const partnerRouter = require('./routes/partnerRouter');
 const uploadRouter = require('./routes/updloadRouter');
 const favoriteRouter = require('./routes/favoriteRouter');
+const commentRouter = require('./routes/commentRouter');
 
 const app = express();
+app.use(cors());
 
 app.all('*', (req, res, next) => {
   if (req.secure) {
@@ -52,11 +55,12 @@ app.use('/api/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/campsites', campsiteRouter);
-app.use('/api/promotions', promotionRouter);
-app.use('/api/partners', partnerRouter);
-app.use('/api/imageUpload', uploadRouter);
-app.use('/api/favorites', favoriteRouter);
+app.use('/campsites', campsiteRouter);
+app.use('/promotions', promotionRouter);
+app.use('/partners', partnerRouter);
+app.use('/imageUpload', uploadRouter);
+app.use('/favorites', favoriteRouter);
+app.use('/comments', commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
