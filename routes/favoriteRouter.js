@@ -3,6 +3,7 @@ const favoriteRouter = express.Router();
 const authenticate = require('../authenticate');
 const Favorite = require('../models/favorite');
 const cors = require('./cors');
+const Campsite = require('../models/campsite');
 
 favoriteRouter.route('/')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
@@ -82,6 +83,16 @@ favoriteRouter.route('/:campsiteId')
     res.end(`GET operation not supported on /favorites/${req.params.campsiteId}`);
   })
   .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    Campsite.findById(req.params.campsiteId)
+      .then(campsite => {
+        if (!campsite) {
+          err = new Error(`Campsite ${req.params.campsiteId} not found`)
+          err.status = 404;
+          return next(err);
+        }
+      })
+      .catch(err => next(err));
+
     Favorite.findOne({ user: req.user._id })
       .then(favorite => {
         if (favorite) {
